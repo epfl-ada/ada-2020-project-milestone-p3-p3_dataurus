@@ -18,6 +18,7 @@ Turning points in financial time series are the hardest and arguably the most im
 
 * **Google Trends data collection:** We will use [pytrends](https://pypi.org/project/pytrends/) to extract the Google Trends data.
 * **Sentiment analysis:** We will classify each headline by assigning a {-1, 1} label indicating whether it was negative or positive, respectively. We will use an already available tool (still to be decided, e.g., [TextBlob](https://textblob.readthedocs.io/en/dev/)). Then, we will experiment with either performing majority voting on the news of each day and get a single label for that day or computing the average and getting a value in the range [-1, 1]. By multiplying these numerical labels with the trends index (indicating the direction) we can get the values to train our model with.
+* **Predictions:** For both datasets, we will predict the closing price on Fridays. Thus, using closing prices of previous weeks and news of the current week, we will try to predict the closing price for this week.
 
 ## Proposed timeline
 
@@ -32,3 +33,5 @@ Turning points in financial time series are the hardest and arguably the most im
 * **Week 3:** Dimitris will prepare the data story, Orest will prepare the figures, and Theofilos the short video presentation.
 
 ## Questions for TAs (optional)
+
+* Can you suggest any models for the sentiment analysis?
