@@ -16,8 +16,8 @@ Turning points in financial time series are the hardest and arguably the most im
 
 ## Methods
 
-* **Google Trends data collection:** We will use [pytrends](https://pypi.org/project/pytrends/) to extract the Google Trends data and the Twitter API for the tweets.
-* **Sentiment analysis:** We will classify each headline by assigning a {-1, 1} label indicating whether it was negative or positive, respectively. Then, we will experiment with either performing majority voting on the news of each day and get a single label for that day or computing the average and getting a value in the range [-1, 1]. By multiplying these numerical labels with the trends index (indicating the direction) we can get the values to train our model with.
+* **Google Trends data collection:** We will use [pytrends](https://pypi.org/project/pytrends/) to extract the Google Trends data.
+* **Sentiment analysis:** We will classify each headline by assigning a {-1, 1} label indicating whether it was negative or positive, respectively. We will use an already available tool (still to be decided, e.g., [TextBlob](https://textblob.readthedocs.io/en/dev/)). Then, we will experiment with either performing majority voting on the news of each day and get a single label for that day or computing the average and getting a value in the range [-1, 1]. By multiplying these numerical labels with the trends index (indicating the direction) we can get the values to train our model with.
 
 ## Proposed timeline
 
@@ -27,7 +27,7 @@ Turning points in financial time series are the hardest and arguably the most im
 
 ## Organization within the team
 
-* **Week 1:** Orest will download the bitcoin dataset and Theofilos will download the S&P dataset. Each one will download the corresponding Google Trends data. Dimitris will search for papers related to sentimental analysis on Twitter. We will all read some selected papers and decide which model to use.
+* **Week 1:** Orest will download the bitcoin dataset and Theofilos will download the S&P dataset. Each one will download the corresponding Google Trends data. Dimitris will search for papers related to sentimental analysis. We will all read some selected papers and decide which model to use.
 * **Week 2:** We will work together on applying the sentiment analysis model on the news and incorporating it into the autoregressive model.
 * **Week 3:** Dimitris will prepare the data story, Orest will prepare the figures, and Theofilos the short video presentation.
 
