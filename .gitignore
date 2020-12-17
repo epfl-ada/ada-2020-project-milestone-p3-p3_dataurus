@@ -1,2 +1,3 @@
 # dont upload data
-data/*
+data/fin_news.csv
+data/bitcoin_news.csv
