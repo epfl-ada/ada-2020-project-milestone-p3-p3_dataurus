@@ -1,6 +1,8 @@
 from datetime import datetime
+from datetime import timedelta
+import pandas as pd
 
-def pullTrends(kw_list, start_date, end_date):
+def pullTrends(pytrends, kw_list, start_date, end_date):
 
     def toTimeframe(ts1, ts2):
         s1 = f"{ts1:%Y-%m-%d}"
