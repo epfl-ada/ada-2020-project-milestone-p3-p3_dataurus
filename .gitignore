@@ -1,3 +1,6 @@
 # dont upload data
 data/fin_news.csv
 data/bitcoin_news.csv
+*.DS_Store
+**/__pycache__/
+.vscode
