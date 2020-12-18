@@ -1,9 +1,13 @@
-from datetime import datetime
-from datetime import timedelta
 import pandas as pd
+from datetime import timedelta
 
-def pullTrends(pytrends, kw_list, start_date, end_date):
 
+def pullTrends(kw_list, start_date, end_date):
+    from pytrends.request import TrendReq
+
+    pytrends = TrendReq(hl='en-US', tz=360)
+
+    term = kw_list[0]
     def toTimeframe(ts1, ts2):
         s1 = f"{ts1:%Y-%m-%d}"
         s2 = f"{ts2:%Y-%m-%d}"
@@ -30,6 +34,18 @@ def pullTrends(pytrends, kw_list, start_date, end_date):
     def first_day_of_month(d):
         return d.replace(day=1)
 
+    def renormalize(df):
+        months, daylist = df
+        for i in range(months.shape[0]):
+            daylist[i][term] = daylist[i][term].apply(lambda x : x*months.iloc[i][term])
+        return daylist
+
+    def flatten(daylist):
+        flattened = daylist[0]
+        for i in range(1, len(daylist)):
+            flattened = flattened.append(daylist[i])
+        return flattened
+
 
     start_date = pd.to_datetime(start_date)
     st_date =  start_date
@@ -49,25 +65,22 @@ def pullTrends(pytrends, kw_list, start_date, end_date):
     start_date_str = f"{start_date_tmp:%Y-%m-%d}"
     end_date_str = f"{end_date:%Y-%m-%d}"
 
-    print(end_date_str)
     #get monthly
-    pytrends.build_payload(kw_list, cat=0, timeframe="{0} {1}".format(start_date_str, end_date_str), geo='', gprop='')
+    pytrends.build_payload(kw_list, cat=0, timeframe="{0} {1}".format(start_date_str, end_date_str), geo='US', gprop='')
     monthly = pytrends.interest_over_time()
-    monthly[monthly.index > st_date]
+    monthly = monthly[monthly.index > st_date]
 
 
     #get daily
-    start_date = first_day_of_month(start_date)
+    start_date = first_day_of_month(st_date)
     tmp_end_date = start_date
     tmp_end_date =last_day_of_month(start_date)
 
     daylist = []
 
     for i in range(n_months):
-        print(start_date)
-        print(tmp_end_date)
 
-        pytrends.build_payload(kw_list, cat=0, timeframe=toTimeframe(start_date, tmp_end_date) , geo='', gprop='')
+        pytrends.build_payload(kw_list, cat=0, timeframe=toTimeframe(start_date, tmp_end_date) , geo='US', gprop='')
         daily = pytrends.interest_over_time()
 
         daylist.append(daily)
@@ -76,4 +89,13 @@ def pullTrends(pytrends, kw_list, start_date, end_date):
         tmp_end_date = last_day_of_month(start_date)
 
 
-    return (monthly, daylist)
+    return flatten(renormalize((monthly, daylist))).drop(['isPartial'], axis=1)
+
+
+# Pull Trends for s&p500
+df = pullTrends(["s&p 500"], '2019-01-01' ,'2020-06-01')
+df.to_csv('../../data/s_trends.csv', sep='\t')
+
+# Pull Trends for bitcoin
+df = pullTrends(["bitcoin"], '2016-12-01' ,'2020-05-01')
+df.to_csv('../../data/bi_trends.csv', sep='\t')

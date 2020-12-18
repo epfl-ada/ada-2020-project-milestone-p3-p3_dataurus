@@ -1,2 +1,10 @@
 # dont upload figures
 figs/
+
+# dont uplod the notebook with plotly figures
+scripts/extension_plotly.ipynb
+
+# dont upload data
+*.DS_Store
+**/__pycache__/
+.vscode
