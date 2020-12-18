@@ -1,4 +1,4 @@
-# Predicting the Present with Google Trends
+# Predicting the Present with Google Trends and News Headlines
 
 ## Abstract
 
