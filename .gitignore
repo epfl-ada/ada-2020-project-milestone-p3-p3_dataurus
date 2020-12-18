@@ -1,3 +1,2 @@
-# dont upload data
-data/fin_news.csv
-data/bitcoin_news.csv
+# dont upload figures
+figs/
