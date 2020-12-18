@@ -12,7 +12,7 @@ Turning points in financial time series are the hardest and arguably the most im
 ## Proposed dataset
 
 * [S&P 500 Index prices](https://finance.yahoo.com/quote/%5EGSPC/) for the period of January 2019 to May 2020, [Google Trends for the S&P 500](https://trends.google.com/trends/explore?date=2019-01-01%202020-05-31&geo=US&q=%2Fm%2F016yss) and [financial news headlines](https://www.kaggle.com/miguelaenlle/massive-stock-news-analysis-db-for-nlpbacktests?select=analyst_ratings_processed.csv) for the same period.
-* [Bitcoin prices](https://www.coindesk.com/price/bitcoin) for the period of December 2016 to April 2020, [Google Trends for bitcoin](https://trends.google.com/trends/explore?date=today%205-y&geo=US&q=%2Fm%2F05p0rrx) and [bitcoin related news](https://www.kaggle.com/asahicantu/cryptocurency-cointelegraph-newsfeed?select=cointelegraph_news_content.csv) for the same period.
+* [Bitcoin prices](https://finance.yahoo.com/quote/BTC-USD/history/) for the period of December 2016 to April 2020, [Google Trends for bitcoin](https://trends.google.com/trends/explore?date=today%205-y&geo=US&q=%2Fm%2F05p0rrx) and [bitcoin related news](https://www.kaggle.com/asahicantu/cryptocurency-cointelegraph-newsfeed?select=cointelegraph_news_content.csv) for the same period.
 
 ## Methods
 
@@ -20,18 +20,10 @@ Turning points in financial time series are the hardest and arguably the most im
 * **Sentiment analysis:** We will classify each headline by assigning a {-1, 1} label indicating whether it was negative or positive, respectively. We will use an already available tool (still to be decided, e.g., [TextBlob](https://textblob.readthedocs.io/en/dev/)). Then, we will experiment with either performing majority voting on the news of each day and get a single label for that day or computing the average and getting a value in the range [-1, 1]. By multiplying these numerical labels with the trends index (indicating the direction) we can get the values to train our model with.
 * **Predictions:** For both datasets, we will predict the closing price on Fridays. Thus, using closing prices of previous weeks and news of the current week, we will try to predict the closing price for this week.
 
-## Proposed timeline
-
-* **Week 1:** Download the two datasets with the Trends data. Find a model that performs sentiment analysis from bibliography.
-* **Week 2:** Run the sentiment analysis model on our news to predict their labels. Train and run the autoregressive model with and without the impact of news to compare the performance of the two. Analyze the results and refine our approach if needed.
-* **Week 3:** Finish coding, prepare a data story, figures and a short video presentation.
 
 ## Organization within the team
 
-* **Week 1:** Orest will download the bitcoin dataset and Theofilos will download the S&P dataset. Each one will download the corresponding Google Trends data. Dimitris will search for papers related to sentimental analysis. We will all read some selected papers and decide which model to use.
-* **Week 2:** We will work together on applying the sentiment analysis model on the news and incorporating it into the autoregressive model.
-* **Week 3:** Dimitris will prepare the data story, Orest will prepare the figures, and Theofilos the short video presentation.
+* Orest downloaded the bitcoin dataset and selected the news for the required period, contributed to the data story by writing the text and also wrote the report.
+* Theofilos downloaded the S&P dataset and selected the news for the required period, contributed to the data story by creating the graphs and implementing the methods.
+* Dimitris downloaded and aggregated the Google Trends data. Dimitis also performed the sentimental analysis on the news and contributed to the data story by setting up the Jekyll framework.
 
-## Questions for TAs (optional)
-
-* Can you suggest any models for the sentiment analysis?
